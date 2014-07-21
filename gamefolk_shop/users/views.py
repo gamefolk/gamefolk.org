@@ -44,7 +44,7 @@ def login():
             login_user(user)
             flash('Successfully logged in as %s.' % user.name)
             return redirect(request.args.get('next') or
-                url_for('general.index'))
+                url_for('users.profile'))
         flash('Incorrect email or password.', 'error-message')
     return render_template("users/login.html", form=form)
 
