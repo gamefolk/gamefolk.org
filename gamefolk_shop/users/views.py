@@ -3,8 +3,8 @@ from flask import (Blueprint, request, render_template, flash, g, session,
 from flask.ext.login import (login_required, current_user, login_user,
     logout_user)
 
-from gamefolk_shop import login_manager
-from gamefolk_shop.users.forms import LoginForm
+from gamefolk_shop import db, login_manager
+from gamefolk_shop.users.forms import LoginForm, RegisterForm
 from gamefolk_shop.users.models import User
 
 mod = Blueprint('users', __name__, url_prefix='/users')
@@ -17,16 +17,23 @@ def load_user(user_id):
 
 @mod.route('/me')
 @login_required
-def home():
+def profile():
     return render_template("users/profile.html", user=current_user)
 
 @mod.route('/register', methods=['GET','POST'])
 def register():
-    if request.method == 'GET':
-        return render_template('register.html')
-    username = request.form.get('username')
-    password = request.form.get('password')
-    email = request.form.get('email')
+    form = RegisterForm(request.form)
+    if form.validate_on_submit():
+        user = User(name=form.name.data, email=form.email.data,
+            password=form.password.data)
+        db.session.add(user)
+        db.session.commit()
+
+        login_user(user)
+
+        flash("Thanks for registering!")
+        return redirect(url_for('users.profile'))
+    return render_template('users/register.html', form=form)
 
 @mod.route('/login', methods=['GET','POST'])
 def login():
