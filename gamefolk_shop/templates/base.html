@@ -1,0 +1,16 @@
+<html>
+<head>
+  <title>Gamefolk Shop</title>
+</head>
+<body>
+<div id="main">
+  <div id="messages">
+    {% for category, msg in get_flashed_messages(with_categories=True) %}
+      <p class="message flash-{{ category }}">{{ msg }}</p>
+    {% endfor %}
+  </div>
+{% block content %}
+{% endblock content %}
+</div>
+</body>
+</html>

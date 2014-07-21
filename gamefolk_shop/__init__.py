@@ -1,0 +1,18 @@
+from flask import Flask, render_template
+from flask.ext.login import LoginManager
+from flask.ext.sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+app.config.from_object('config')
+app.config.from_envvar('GAMEFOLKSHOP_SETTINGS')
+
+db = SQLAlchemy(app)
+login_manager = LoginManager(app)
+
+from gamefolk_shop.general.views import mod as general_module
+from gamefolk_shop.users.views import mod as users_module
+app.register_blueprint(general_module)
+app.register_blueprint(users_module)
+
+if __name__ == "__main__":
+    app.run(debug=True)
