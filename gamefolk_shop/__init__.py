@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask
 from flask.ext.login import LoginManager
 from flask.ext.sqlalchemy import SQLAlchemy
 
@@ -9,8 +9,10 @@ app.config.from_envvar('GAMEFOLKSHOP_SETTINGS')
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 
+# Register blueprints. This must be done after the database is created.
 from gamefolk_shop.general.views import mod as general_module
 from gamefolk_shop.users.views import mod as users_module
+
 app.register_blueprint(general_module)
 app.register_blueprint(users_module)
 
