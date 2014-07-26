@@ -2,6 +2,8 @@ from flask_wtf import Form, RecaptchaField
 from wtforms import TextField, PasswordField
 from wtforms.validators import Required, Email, EqualTo
 
+from gamefolk_shop.users.models import User
+
 class LoginForm(Form):
     """Form to log in to the shop."""
     email = TextField('Email', [Required(), Email()])
@@ -17,3 +19,17 @@ class RegisterForm(Form):
         EqualTo('password', message='Passwords must match'),
         ])
     recaptcha = RecaptchaField()
+
+    def validate(self):
+        """Custom validation for registration. Ensure that the supplied email
+        address is not in use."""
+        if not Form.validate(self):
+            return False
+
+        user = User.query.filter_by(email=self.email.data).first()
+        if user is not None:
+            self.email.errors.append('This email is already in use. Please \
+                use another one.')
+            return False
+
+        return True
