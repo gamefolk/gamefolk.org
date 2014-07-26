@@ -1,14 +1,13 @@
 {% extends "base.html" %}
 
+{% from "helpers.html" import render_field %}
+
 {% block content %}
 <h1>Sign in</h1>
 <form action="" method="post" id="login">
   {{ form.csrf_token }}
-  {{ form.hidden_tag() }}
-  <label for="email">Email Address</label>
-  {{ form.email }}
-  <label for="password">Password</label>
-  {{ form.password }}
+  {{ render_field(form.email) }}
+  {{ render_field(form.password) }}
   <input type="submit" value="Sign In">
 </form>
 <h2>Not Registered? <a href="{{ url_for('users.register') }}">Click here.</a></h2>

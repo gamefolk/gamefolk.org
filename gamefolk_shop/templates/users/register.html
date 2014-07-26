@@ -1,19 +1,16 @@
 {% extends "base.html" %}
 
+{% from "helpers.html" import render_field %}
+
 {% block content %}
   <h1>Register for the Gamefolk Shop</h1>
   <form method="POST" action="">
     {{ form.csrf_token }}
-    <label for="name">Name</label>
-    {{ form.name }}
-    <label for="email">Email</label>
-    {{ form.email }}
-    <label for="password">Password</label>
-    {{ form.password }}
-    <label for="confirm">Confirm Password</label>
-    {{ form.confirm }}
-    <label>ReCaptcha</label>
-    {{ form.recaptcha }}
+    {{ render_field(form.name) }}
+    {{ render_field(form.email) }}
+    {{ render_field(form.password) }}
+    {{ render_field(form.confirm) }}
+    {{ render_field(form.recaptcha) }}
     <button type="submit">Submit</button>
   </form>
 {% endblock %}
