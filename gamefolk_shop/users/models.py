@@ -1,3 +1,6 @@
+import random
+import string
+
 from flask.ext.login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -8,6 +11,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)        # pylint: disable=C0103
     email = db.Column(db.String(120), unique=True)
     _password_hash = db.Column(db.String(160))
+    _secret_code = db.Column(db.String(20))
 
     def __init__(self, password, email):
         self.email = email
@@ -25,3 +29,10 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.id
+
+def create_secret_code():
+    """Generates a 6 character alphanumeric code to be used to verify that
+    the user has purchased a cartridge."""
+    characters = string.ascii_uppercase + string.digits
+    size = 6
+    return ''.join(random.choice(characters) for _ in range(size))
