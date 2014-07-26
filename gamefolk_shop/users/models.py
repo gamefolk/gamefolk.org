@@ -6,12 +6,10 @@ from gamefolk_shop import db
 class User(UserMixin, db.Model):
     """A user of the shop."""
     id = db.Column(db.Integer, primary_key=True)        # pylint: disable=C0103
-    name = db.Column(db.String(80))
     email = db.Column(db.String(120), unique=True)
     _password_hash = db.Column(db.String(160))
 
-    def __init__(self, name, password, email):
-        self.name = name
+    def __init__(self, password, email):
         self.email = email
         self.set_password(password)
 

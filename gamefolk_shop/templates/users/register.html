@@ -6,7 +6,6 @@
   <h1>Register for the Gamefolk Shop</h1>
   <form method="POST" action="">
     {{ form.csrf_token }}
-    {{ render_field(form.name) }}
     {{ render_field(form.email) }}
     {{ render_field(form.password) }}
     {{ render_field(form.confirm) }}

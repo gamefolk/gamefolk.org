@@ -11,7 +11,6 @@ class LoginForm(Form):
 
 class RegisterForm(Form):
     """Form to register an account for the shop."""
-    name = TextField('Name', [Required()])
     email = TextField('Email', [Required(), Email()])
     password = PasswordField('Password', [Required()])
     confirm = PasswordField('Confirm Password', [

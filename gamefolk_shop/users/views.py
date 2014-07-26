@@ -29,8 +29,7 @@ def register():
     """New registration page."""
     form = RegisterForm(request.form)
     if form.validate_on_submit():
-        user = User(name=form.name.data, email=form.email.data, \
-            password=form.password.data)
+        user = User(email=form.email.data, password=form.password.data)
         db.session.add(user)
         db.session.commit()
 
@@ -49,7 +48,7 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and user.check_password(form.password.data):
             login_user(user)
-            flash('Successfully logged in as %s.' % user.name)
+            flash('Successfully logged in.')
             return redirect(request.args.get('next') or \
                 url_for('users.profile'))
         flash('Incorrect email or password.', 'error-message')

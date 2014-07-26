@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Welcome, {{ user.name }}!</h1>
+<h1>Welcome to your profile!</h1>
 <form action="{{ url_for('users.logout') }}"><button type="submit">Logout</button></form>
 {% endblock %}
