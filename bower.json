@@ -1,0 +1,22 @@
+{
+  "name": "gamefolk-shop",
+  "version": "0.0.1",
+  "homepage": "https://github.com/gamefolk/shop",
+  "authors": [
+    "Andy Russell <arussell123@gmail.com>"
+  ],
+  "description": "The Cartridge Shop for Gamefolk",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "~5.3.1"
+  }
+}
