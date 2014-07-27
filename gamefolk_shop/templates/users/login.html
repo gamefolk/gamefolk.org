@@ -8,7 +8,7 @@
   {{ form.csrf_token }}
   {{ render_field(form.email) }}
   {{ render_field(form.password) }}
-  <input type="submit" value="Sign In">
+  <button type="submit">Sign In</button>
 </form>
 <h2>Not Registered? <a href="{{ url_for('users.register') }}">Click here.</a></h2>
 {% endblock %}
