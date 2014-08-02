@@ -13,11 +13,6 @@
 </head>
 <body>
 <div id="main">
-  <div id="messages">
-    {% for category, msg in get_flashed_messages(with_categories=True) %}
-      <p class="message flash-{{ category }}">{{ msg }}</p>
-    {% endfor %}
-  </div>
 {% block navbar %}
 <nav class="top-bar" data-topbar>
   <ul class="title-area">
@@ -38,6 +33,14 @@
   </section>
 </nav>
 {% endblock %}
+<div id="messages" class="row">
+  {% for category, msg in get_flashed_messages(with_categories=True) %}
+  <div data-alert class="alert-box {{ category }}">
+    {{ msg }}
+    <a href="#" class="close">&times;</a>
+  </div>
+  {% endfor %}
+</div>
 {% block content %}
 {% endblock content %}
 </div>

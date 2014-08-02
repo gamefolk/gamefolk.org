@@ -35,7 +35,7 @@ def register():
 
         login_user(user)
 
-        flash("Thanks for registering!")
+        flash("Thanks for registering!", 'info')
         return redirect(url_for('users.profile'))
     return render_template('users/register.html', form=form)
 
@@ -48,10 +48,10 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and user.check_password(form.password.data):
             login_user(user)
-            flash('Successfully logged in.')
+            flash('Successfully logged in.', 'success')
             return redirect(request.args.get('next') or \
                 url_for('users.profile'))
-        flash('Incorrect email or password.', 'error-message')
+        flash('Incorrect email or password.', 'alert')
     return render_template("users/login.html", form=form)
 
 @mod.route('/logout')
@@ -59,5 +59,5 @@ def login():
 def logout():
     """Logout the current user."""
     logout_user()
-    flash('Logged out successfully.')
+    flash('Logged out successfully.', 'success')
     return redirect(url_for('general.index'))
