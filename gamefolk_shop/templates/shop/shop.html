@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script async="async" src="https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant={{ config['PAYPAL_MERCHANT_ID'] }}"
+    data-button="buynow"
+    data-name="Room Full of Cats Cartridge"
+    data-quantity="1"
+    data-amount="{{ config['CARTRIDGE_COST'] }}"
+    data-currency="USD"
+    data-callback="{{ url_for('shop.instant_payment_notification', _external=True) }}"
+    data-custom="{{ current_user.get_id() }}"
+    {% if config['DEBUG'] %}
+    data-env="sandbox"
+    {% endif %}
+></script>
+{% endblock %}

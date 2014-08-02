@@ -1,5 +1,4 @@
 import http.client
-import os.path
 
 from flask import Flask
 from flask.ext.login import LoginManager
@@ -14,8 +13,10 @@ login_manager = LoginManager(app)
 
 # Register blueprints. This must be done after the database is created.
 from gamefolk_shop.general.views import mod as general_module
+from gamefolk_shop.shop.views import mod as shop_module
 from gamefolk_shop.users.views import mod as users_module
 app.register_blueprint(general_module)
+app.register_blueprint(shop_module)
 app.register_blueprint(users_module)
 
 from gamefolk_shop.assets import assets
