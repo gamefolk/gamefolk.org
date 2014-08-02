@@ -18,6 +18,26 @@
       <p class="message flash-{{ category }}">{{ msg }}</p>
     {% endfor %}
   </div>
+{% block navbar %}
+<nav class="top-bar" data-topbar>
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="{{ url_for('general.index') }}">Gamefolk Shop</a></h1>
+    </li>
+  </ul>
+  <section class="top-bar-section">
+    <ul class="right">
+      <li class="has-form">
+      {% if current_user.is_authenticated() %}
+        <a href="{{ url_for('users.logout') }}" class="button">Logout</a>
+      {% else %}
+        <a href="{{ url_for('users.login') }}" class="button">Login</a>
+      {% endif %}
+      </li>
+    </ul>
+  </section>
+</nav>
+{% endblock %}
 {% block content %}
 {% endblock content %}
 </div>
