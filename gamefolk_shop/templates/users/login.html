@@ -3,12 +3,24 @@
 {% from "helpers.html" import render_field %}
 
 {% block content %}
-<h1>Sign in</h1>
-<form action="" method="post" id="login">
-  {{ form.csrf_token }}
-  {{ render_field(form.email) }}
-  {{ render_field(form.password) }}
-  <button type="submit">Sign In</button>
-</form>
-<h2>Not Registered? <a href="{{ url_for('users.register') }}">Click here.</a></h2>
+<div class="row">
+  <header class="large-9 small-9 column">
+    <h1>Sign in</h1>
+  </header>
+</div>
+<div class="row">
+  <section class="large-9 small-9 column">
+    <form action="" method="post" id="login">
+      {{ form.csrf_token }}
+      {{ render_field(form.email) }}
+      {{ render_field(form.password) }}
+      <button type="submit">Sign In</button>
+    </form>
+  </section>
+</div>
+<div class="row">
+  <section class="large-9 small-9 column">
+    <h2>Not Registered? <a href="{{ url_for('users.register') }}">Click here.</a></h2>
+  </section>
+</div>
 {% endblock %}
