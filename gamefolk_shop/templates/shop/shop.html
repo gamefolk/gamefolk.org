@@ -1,16 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-<script async="async" src="https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant={{ config['PAYPAL_MERCHANT_ID'] }}"
-    data-button="buynow"
-    data-name="Room Full of Cats Cartridge"
-    data-quantity="1"
-    data-amount="{{ config['CARTRIDGE_COST'] }}"
-    data-currency="USD"
-    data-callback="{{ url_for('shop.instant_payment_notification', _external=True) }}"
-    data-custom="{{ current_user.get_id() }}"
-    {% if config['DEBUG'] %}
-    data-env="sandbox"
-    {% endif %}
-></script>
+<div class="row">
+  <header class="large-9 small-9 column">
+    <h1>Purchase a Cartridge</h1>
+  </header>
+</div>
+<div class="row">
+  <div class="large-4 small-4 small-centered column">
+    <img src="http://placehold.it/400x400" />
+    <script async="async" src="https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant={{ config['PAYPAL_MERCHANT_ID'] }}"
+        data-button="buynow"
+        data-name="Room Full of Cats Cartridge"
+        data-quantity="1"
+        data-amount="{{ config['CARTRIDGE_COST'] }}"
+        data-currency="USD"
+        data-callback="{{ url_for('shop.instant_payment_notification', _external=True) }}"
+        data-custom="{{ current_user.get_id() }}"
+        {% if config['DEBUG'] %}
+        data-env="sandbox"
+        {% endif %}
+    ></script>
+  </div>
+</div>
 {% endblock %}
