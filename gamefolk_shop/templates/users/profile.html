@@ -6,4 +6,11 @@
     <h1>Welcome to your profile!</h1>
   </header>
 </div>
+{% if current_user.secret_code %}
+<div class="row">
+  <section class="large-9 small-9 column">
+    <p>Thanks for buying a cartridge! Your secret code is <strong>{{ current_user.secret_code }}</strong>.</p>
+  </section>
+</div>
+{% endif %}
 {% endblock %}
