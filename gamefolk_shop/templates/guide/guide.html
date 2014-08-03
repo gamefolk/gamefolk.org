@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+  <div class="large-9 small-12 columns">
+    {% filter markdown %}
+    {%- include "guide/guide.md" -%}
+    {% endfilter %}
+  </div>
+</div>
+{% endblock %}
