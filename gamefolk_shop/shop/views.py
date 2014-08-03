@@ -3,6 +3,7 @@
 from functools import wraps
 from itertools import chain
 import json
+import logging
 
 import flask
 from flask import Blueprint, request, render_template
@@ -10,7 +11,9 @@ from flask.ext.login import login_required
 import requests
 from werkzeug.datastructures import ImmutableOrderedMultiDict
 
-from gamefolk_shop import app
+from gamefolk_shop import app, db
+from gamefolk_shop.shop.models import Transaction
+from gamefolk_shop.users.models import User, create_secret_code
 
 mod = Blueprint('shop', __name__, url_prefix='/shop')
 
@@ -35,6 +38,29 @@ def ordered_storage(route):
         return route(*args, **kwargs)
     return decorator
 
+def record_transaction(transaction_id, user_id):
+    """Store a successful PayPal transaction and generate a user's secret
+    code."""
+    existing_transaction = Transaction.query.filter_by(
+        transaction_id=transaction_id).first()
+    if existing_transaction:
+        logging.warning('Duplicate transaction {id} encountered', \
+                id=transaction_id)
+        return json.dumps({'status': 'failure'})
+    transaction = Transaction(transaction_id=transaction_id, user_id=user_id)
+    db.session.add(transaction)
+    db.session.commit()
+    purchasing_user = User.query.filter_by(id=int(user_id)).first()
+    purchasing_user.secret_code = create_secret_code()
+    db.session.commit()
+    logging.info('Complete transaction {id} recorded', id=transaction_id)
+
+def validate_ipn(response, ipn_message):
+    """Validates an ipn message according to PayPal's recommendations."""
+    intended_recipient = app.config['PAYPAL_MERCHANT_EMAIL']
+    return (response.text == 'VERIFIED' and
+            ipn_message['receiver_email'] == intended_recipient)
+
 @mod.route('/ipn', methods=['POST'])
 @ordered_storage
 def instant_payment_notification():
@@ -42,12 +68,13 @@ def instant_payment_notification():
     ipn_message = request.form
     verify_params = chain(ipn_message.items(), IPN_VERIFY_PARAMS)
     response = requests.post(IPN_URL, params=dict(verify_params))
-    if (response.text != 'VERIFIED' or
-            ipn_message['receiver_email'] != app.config['PAYPAL_MERCHANT_EMAIL']):
-        print('PayPal IPN {arg} did not validate' % ipn_message)
-        return json.dumps({'status': 'failure'}), 400
+    if not validate_ipn(response, ipn_message):
+        logging.warning('PayPal IPN {arg} did not validate', arg=ipn_message)
+        return json.dumps({'status': 'failure'})
 
     if ipn_message['payment_status'] == 'Completed':
-        print('User with id ' + ipn_message['custom'] + ' paid!')
+        transaction_id = ipn_message['txn_id']
+        user_id = ipn_message['custom']
+        record_transaction(transaction_id, user_id)
 
     return json.dumps({'status': 'complete'})

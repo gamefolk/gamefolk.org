@@ -11,7 +11,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)        # pylint: disable=C0103
     email = db.Column(db.String(120), unique=True)
     _password_hash = db.Column(db.String(160))
-    _secret_code = db.Column(db.String(20))
+    secret_code = db.Column(db.String(20))
 
     def __init__(self, password, email):
         self.email = email
