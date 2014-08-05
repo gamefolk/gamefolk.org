@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 from flask.ext.markdown import Markdown
 
-from gamefolk_shop import app
+from gamefolk import app
 
 Markdown(app)
 

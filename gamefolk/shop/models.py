@@ -1,4 +1,4 @@
-from gamefolk_shop import db
+from gamefolk import db
 
 class Transaction(db.Model):
     """A completed PayPal transaction."""

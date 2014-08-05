@@ -11,9 +11,9 @@ from flask.ext.login import login_required
 import requests
 from werkzeug.datastructures import ImmutableOrderedMultiDict
 
-from gamefolk_shop import app, db
-from gamefolk_shop.shop.models import Transaction
-from gamefolk_shop.users.models import User, create_secret_code
+from gamefolk import app, db
+from gamefolk.shop.models import Transaction
+from gamefolk.users.models import User, create_secret_code
 
 mod = Blueprint('shop', __name__, url_prefix='/shop')
 

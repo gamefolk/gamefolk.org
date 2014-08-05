@@ -1,2 +1,2 @@
-from gamefolk_shop import app
+from gamefolk import app
 app.run(debug=True)

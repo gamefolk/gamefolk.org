@@ -5,9 +5,9 @@ from flask import (Blueprint, request, render_template, flash, redirect, \
 from flask.ext.login import (login_required, current_user, login_user, \
     logout_user)
 
-from gamefolk_shop import db, login_manager
-from gamefolk_shop.users.forms import LoginForm, RegisterForm
-from gamefolk_shop.users.models import User
+from gamefolk import db, login_manager
+from gamefolk.users.forms import LoginForm, RegisterForm
+from gamefolk.users.models import User
 
 mod = Blueprint('users', __name__, url_prefix='/users')
 

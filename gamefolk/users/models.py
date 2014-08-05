@@ -4,7 +4,7 @@ import string
 from flask.ext.login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from gamefolk_shop import db
+from gamefolk import db
 
 class User(UserMixin, db.Model):
     """A user of the shop."""

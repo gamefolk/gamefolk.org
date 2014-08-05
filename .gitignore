@@ -58,7 +58,7 @@ target/
 node_modules/
 bower_components/
 *.log
-gamefolk_shop/static
+gamefolk/static
 
 build/
 dist/

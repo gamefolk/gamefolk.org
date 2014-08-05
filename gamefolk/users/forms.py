@@ -2,7 +2,7 @@ from flask_wtf import Form, RecaptchaField, Recaptcha
 from wtforms import TextField, PasswordField
 from wtforms.validators import Required, Email, EqualTo
 
-from gamefolk_shop.users.models import User
+from gamefolk.users.models import User
 
 class LoginForm(Form):
     """Form to log in to the shop."""
