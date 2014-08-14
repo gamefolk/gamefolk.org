@@ -6,7 +6,7 @@ import json
 import logging
 
 import flask
-from flask import Blueprint, request, render_template
+from flask import Blueprint, flash, request, render_template
 from flask.ext.login import login_required
 import requests
 from werkzeug.datastructures import ImmutableOrderedMultiDict
@@ -28,6 +28,13 @@ else:
 def shop():
     """The main view for the shop."""
     return render_template('shop/shop.html')
+
+@mod.route('/complete-payment')
+@login_required
+def complete_payment():
+    """Route to visit after completed payment."""
+    flash('Payment completed!', 'success')
+    return render_template('shop/complete_payment.html')
 
 def ordered_storage(route):
     """Ensures that requests are processed in the correct order."""
