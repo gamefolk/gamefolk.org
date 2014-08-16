@@ -53,9 +53,11 @@ compiling C99 with lcc.
 and complain about implicit declarations of GBDK library functions. Add the
 following lines after the initial includes in that file to silence those errors.
 
-    #ifndef __LCC__
-    #define NONBANKED ;
-    #endif
+```c
+#ifndef __LCC__
+#define NONBANKED ;
+#endif
+```
 
 ### Static data should be declared `const`
 

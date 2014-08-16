@@ -3,7 +3,7 @@ from flask.ext.markdown import Markdown
 
 from gamefolk import app
 
-Markdown(app)
+Markdown(app, extensions=['fenced_code'])
 
 mod = Blueprint('guide', __name__, url_prefix='/guide')
 

@@ -1,5 +1,20 @@
 {% extends "base.html" %}
 
+{% block styles %}
+{{ super() }}
+{% assets "css_syntax" %}
+<link rel="stylesheet" href="{{ ASSET_URL }}">
+{% endassets %}
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{% assets "js_syntax" %}
+<script src="{{ ASSET_URL }}"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+{% endassets %}
+{% endblock %}
+
 {% block content %}
 <div class="row">
   <div class="large-9 small-12 columns">
