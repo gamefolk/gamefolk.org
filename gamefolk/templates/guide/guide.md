@@ -77,6 +77,30 @@ program. I recommend [BGB]. Although it is a native Windows program, it runs
 nicely under WINE. Many other documents recommend no$gmb, but this emulator does
 not accurately reflect how GameBoy hardware will run your program.
 
+### Converting images
+
+Two programs that convert images files to GBDK-ready C code are [MegaMan_X's GameBoy ToolKit](http://www.yvan256.net/projects/gameboy/#gbtk) (GBTK) and [PCX2GB] (http://www.yvan256.net/projects/gameboy/#pcx2gb). GBTK allows one to choose between several scaling and dithering algorithms and to visually manipulate the resulting image, but does not optimize for empty space/ repeated tiles. PCX2GB is relatively opaque but produces much smaller files. One solution to these limitations is to use both programs:
+
+* Open your image with GBTK and manipulate it until you are satisfied. 
+* Export the result as a BMP file.
+* Convert the BMP to a PCX with GIMP:
+    * Image -> Mode -> Indexed
+    * Generate optimum palette -> Convert
+    * File -> Export As -> ZSoft PCX image
+* Run PCX2GB on your DOS platform of choice:
+    * `pcx2gb o d myimage.pcx myimage.c myimage.map`
+
+This will produce two files, one containing the image tile data ( `char tiledata[]` ) and the other the tile map ( `char tilemap[]` ). You can combine these arrays into one C source file (don't forget to replace the `char`s with `const UBYTE`s!) and then display the image like this:
+
+    disable_interrupts();
+    DISPLAY_OFF;
+    LCDC_REG = 0x01;
+    BGP_REG = 0xE4;
+    set_bkg_data(0, 255, tiledata);
+    set_bkg_tiles(0, 0, 20, 18, tilemap);
+    DISPLAY_ON;
+    enable_interrupts();
+
 [GBDK]: http://gbdk.sourceforge.net
 [BGB]: http://bgb.bircd.org
 [AUR package]: http://aur.archlinux.org/packages/gbdk
