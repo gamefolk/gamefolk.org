@@ -25,4 +25,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-bower-task');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.registerTask('default', ['bower:install', 'autoprefixer']);
 };
