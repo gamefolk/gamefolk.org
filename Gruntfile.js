@@ -7,6 +7,14 @@ module.exports = function(grunt) {
             },
         },
 
+        bower: {
+            install: {
+                options: {
+                    targetDir: 'gamefolk/static/build'
+                }
+            }
+        },
+
         watch: {
             styles: {
                 files: ['gamefolk/static/css/styles.css'],
@@ -15,5 +23,6 @@ module.exports = function(grunt) {
         }
     });
     grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.loadNpmTasks('grunt-bower-task');
     grunt.loadNpmTasks('grunt-contrib-watch');
 };

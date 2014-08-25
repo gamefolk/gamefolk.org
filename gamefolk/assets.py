@@ -1,15 +1,17 @@
+"""Initializes frontend assets."""
+import os
+
 from flask.ext.assets import Bundle, Environment
 
 js = Bundle(
-    'foundation/js/vendor/jquery.js',
-    'foundation/js/vendor/modernizr.js',
-    'foundation/js/foundation.min.js',
+    'jquery/jquery.js',
+    'modernizr/modernizr.js',
+    'foundation/foundation.js',
 )
 
 css = Bundle(
-    'build/css/styles.css',
-    'foundation/css/normalize.css',
-    'foundation/css/foundation.css'
+    'css/styles.css',
+    'foundation/foundation.css'
 )
 
 js_syntax = Bundle(
@@ -17,12 +19,16 @@ js_syntax = Bundle(
 )
 
 css_syntax = Bundle(
-    'highlightjs/styles/default.css'
+    'highlightjs/default.css'
 )
 
-assets = Environment()
 
-assets.register('js_all', js)
-assets.register('css_all', css)
-assets.register('js_syntax', js_syntax)
-assets.register('css_syntax', css_syntax)
+def init_app(app):
+    """Set up webassets for the specified application."""
+    assets = Environment(app)
+    assets.append_path(os.path.join(app.static_folder, 'build'))
+
+    assets.register('js_all', js)
+    assets.register('css_all', css)
+    assets.register('js_syntax', js_syntax)
+    assets.register('css_syntax', css_syntax)

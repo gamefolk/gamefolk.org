@@ -21,7 +21,7 @@ app.register_blueprint(guide_module)
 app.register_blueprint(shop_module)
 app.register_blueprint(users_module)
 
-from gamefolk.assets import assets
+from gamefolk import assets
 assets.init_app(app)
 
 @app.errorhandler(http.client.INTERNAL_SERVER_ERROR)
