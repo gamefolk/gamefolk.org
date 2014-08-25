@@ -7,6 +7,7 @@ js = Bundle(
 )
 
 css = Bundle(
+    'build/css/styles.css',
     'foundation/css/normalize.css',
     'foundation/css/foundation.css'
 )

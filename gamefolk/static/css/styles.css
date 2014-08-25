@@ -1,0 +1,46 @@
+@keyframes flicker {
+  0% {
+    opacity: 1;
+  }
+  12% {
+    opacity: 1;
+  }
+  14% {
+    opacity: 0;
+  }
+  16% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 1;
+  }
+  48% {
+    opacity: 0;
+  }
+  55% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.logo {
+  background-image: url('/static/img/gamefolk_retro.png');
+  background-size: 100% 100%;
+}
+
+.logo img {
+  height: 100%;
+  width: 100%;
+  animation: flicker 20s linear infinite;
+}
