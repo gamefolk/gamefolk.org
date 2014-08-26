@@ -99,7 +99,7 @@ def verify_code():
     """Verifies that a user's email is associated with a given secret code."""
     email = request.args.get('email')
     code = request.args.get('code')
-    user = User.query.filter_by(email=email)
+    user = User.query.filter_by(email=email).first()
     if user and user.secret_code == code:
         return json.dumps({'success': True})
     else:
