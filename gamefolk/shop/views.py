@@ -101,9 +101,6 @@ def verify_code():
     code = request.args.get('code')
     user = User.query.filter_by(email=email).first()
     if user and user.secret_code == code:
-        return json.dumps({'success': True})
+        return 'true'
     else:
-        return json.dumps({
-            'error': 'either a user with that email does not exist or the '
-                     'code is incorrect.'
-        }), http.client.UNAUTHORIZED
+        return 'false', http.client.UNAUTHORIZED
