@@ -24,11 +24,13 @@ if app.debug:
 else:
     IPN_URL = 'https://www.paypal.com/cgi-bin/webscr'
 
+
 @mod.route('/')
 @login_required
 def shop():
     """The main view for the shop."""
     return render_template('shop/shop.html')
+
 
 @mod.route('/complete-payment')
 @login_required
@@ -36,6 +38,7 @@ def complete_payment():
     """Route to visit after completed payment."""
     flash('Payment completed!', 'success')
     return render_template('shop/complete_payment.html')
+
 
 def ordered_storage(route):
     """Ensures that requests are processed in the correct order."""
@@ -46,14 +49,15 @@ def ordered_storage(route):
         return route(*args, **kwargs)
     return decorator
 
+
 def record_transaction(transaction_id, user_id):
     """Store a successful PayPal transaction and generate a user's secret
     code."""
     existing_transaction = Transaction.query.filter_by(
         transaction_id=transaction_id).first()
     if existing_transaction:
-        logging.warning('Duplicate transaction {id} encountered', \
-                id=transaction_id)
+        logging.warning('Duplicate transaction {id} encountered',
+                        id=transaction_id)
         return json.dumps({'status': 'failure'})
     transaction = Transaction(transaction_id=transaction_id, user_id=user_id)
     db.session.add(transaction)
@@ -63,11 +67,13 @@ def record_transaction(transaction_id, user_id):
     db.session.commit()
     logging.info('Complete transaction {id} recorded', id=transaction_id)
 
+
 def validate_ipn(response, ipn_message):
     """Validates an ipn message according to PayPal's recommendations."""
     intended_recipient = app.config['PAYPAL_MERCHANT_EMAIL']
     return (response.text == 'VERIFIED' and
             ipn_message['receiver_email'] == intended_recipient)
+
 
 @mod.route('/ipn', methods=['POST'])
 @ordered_storage
@@ -90,6 +96,7 @@ def instant_payment_notification():
 
 @mod.route('/verify-code')
 def verify_code():
+    """Verifies that a user's email is associated with a given secret code."""
     email = request.args.get('email')
     code = request.args.get('code')
     user = User.query.filter_by(email=email)

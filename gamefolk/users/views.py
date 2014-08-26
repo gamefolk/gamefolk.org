@@ -13,16 +13,19 @@ mod = Blueprint('users', __name__, url_prefix='/users')
 
 login_manager.login_view = 'users.login'
 
+
 @login_manager.user_loader
 def load_user(user_id):
     """Retrieve a user object from the database."""
     return User.query.filter_by(id=user_id).first()
+
 
 @mod.route('/me')
 @login_required
 def profile():
     """The current user's profile page."""
     return render_template("users/profile.html", user=current_user)
+
 
 @mod.route('/register', methods=['GET', 'POST'])
 def register():
@@ -39,6 +42,7 @@ def register():
         return redirect(url_for('users.profile'))
     return render_template('users/register.html', form=form)
 
+
 @mod.route('/login', methods=['GET', 'POST'])
 def login():
     """On a GET request, returns the login page. On a POST request, validates
@@ -49,10 +53,11 @@ def login():
         if user and user.check_password(form.password.data):
             login_user(user)
             flash('Successfully logged in.', 'success')
-            return redirect(request.args.get('next') or \
-                url_for('users.profile'))
+            return redirect(request.args.get('next') or
+                            url_for('users.profile'))
         flash('Incorrect email or password.', 'alert')
     return render_template("users/login.html", form=form)
+
 
 @mod.route('/logout')
 @login_required

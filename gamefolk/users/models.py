@@ -6,6 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from gamefolk import db
 
+
 class User(UserMixin, db.Model):
     """A user of the shop."""
     id = db.Column(db.Integer, primary_key=True)        # pylint: disable=C0103
@@ -29,6 +30,7 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.id
+
 
 def create_secret_code():
     """Generates a 6 character alphanumeric code to be used to verify that

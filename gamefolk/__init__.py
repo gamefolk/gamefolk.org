@@ -1,3 +1,4 @@
+"""Registers modules and initializes the application."""
 import http.client
 
 from flask import Flask
@@ -23,6 +24,7 @@ app.register_blueprint(users_module)
 
 from gamefolk import assets
 assets.init_app(app)
+
 
 @app.errorhandler(http.client.INTERNAL_SERVER_ERROR)
 def server_error_handler(error):

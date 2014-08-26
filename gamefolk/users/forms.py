@@ -4,10 +4,12 @@ from wtforms.validators import Required, Email, EqualTo
 
 from gamefolk.users.models import User
 
+
 class LoginForm(Form):
     """Form to log in to the shop."""
     email = TextField('Email', [Required(), Email()])
     password = PasswordField('Password', [Required()])
+
 
 class RegisterForm(Form):
     """Form to register an account for the shop."""
@@ -17,8 +19,10 @@ class RegisterForm(Form):
         Required(),
         EqualTo('password', message='Passwords do not match.'),
         ])
-    recaptcha = RecaptchaField(validators=[Recaptcha(message='The reCAPTCHA ' \
-        'code you entered was incorrect. Please try again.')])
+    recaptcha_validator = Recaptcha(
+        message='The reCAPTCHA code you entered was incorrect. '
+                'Please try again.')
+    recaptcha = RecaptchaField(validators=[recaptcha_validator])
 
     def validate(self):
         """Custom validation for registration. Ensure that the supplied email

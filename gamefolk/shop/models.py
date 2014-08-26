@@ -1,5 +1,6 @@
 from gamefolk import db
 
+
 class Transaction(db.Model):
     """A completed PayPal transaction."""
     id = db.Column(db.Integer, primary_key=True)        # pylint: disable=C0103
