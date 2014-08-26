@@ -1,6 +1,7 @@
 """Shop-related views."""
 
 from functools import wraps
+import http
 from itertools import chain
 import json
 import logging
@@ -85,3 +86,17 @@ def instant_payment_notification():
         record_transaction(transaction_id, user_id)
 
     return json.dumps({'status': 'complete'})
+
+
+@mod.route('/verify-code')
+def verify_code():
+    email = request.args.get('email')
+    code = request.args.get('code')
+    user = User.query.filter_by(email=email)
+    if user and user.secret_code == code:
+        return json.dumps({'success': True})
+    else:
+        return json.dumps({
+            'error': 'either a user with that email does not exist or the '
+                     'code is incorrect.'
+        }), http.client.UNAUTHORIZED
