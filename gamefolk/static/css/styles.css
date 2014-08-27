@@ -34,6 +34,10 @@
   }
 }
 
+.homepage-hero {
+  background-color: black;
+}
+
 .logo {
   background-image: url('/static/img/gamefolk_retro.png');
   background-size: 100% 100%;
