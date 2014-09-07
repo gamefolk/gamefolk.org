@@ -111,6 +111,14 @@ DISPLAY_ON;
 enable_interrupts();
 ```
 
+### Avoiding promotion
+
+The GBDK compiler (lcc) assumes that expression parameters are signed, which can result in unnecessary overflow handling (promotion of variables to a larger size). To avoid this, explicitly label literals as unsigned by adding a trailing `U`:
+
+```c
+i = j+0x80U;
+```
+
 [GBDK]: http://gbdk.sourceforge.net
 [BGB]: http://bgb.bircd.org
 [AUR package]: http://aur.archlinux.org/packages/gbdk
