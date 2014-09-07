@@ -14,6 +14,8 @@ and the C programming language.
   of GameBoy registers and hardware behavior.
 * [SDCC Manual]: Documentation for SDCC in the case that you would like to
   compile your code directly (that is, without use of the SDCC frontend).
+* [GBDK Libraries Documentation]: Guide to GBDK library functions and various tips
+* [GBDK page on GbdevWiki]: Some useful documentation of the compiler, assembler, and linker
 
 ## Installation
 Before beginning, please ensure that you have installed the toolkit properly
@@ -128,3 +130,5 @@ i = j+0x80U;
 [SDCC manual]: http://sdcc.sourceforge.net/doc/sdccman.pdf
 [GBTK]: http://www.yvan256.net/projects/gameboy/#gbtk
 [PCX2GB]: http://www.yvan256.net/projects/gameboy/#pcx2gb
+[GBDK Libraries Documentation]: http://gbdk.sourceforge.net/doc/gbdk-doc.pdf
+[GBDK page on GbdevWiki]: http://gbdev.gg8.se/wiki/articles/GBDK
