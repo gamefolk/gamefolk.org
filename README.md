@@ -75,7 +75,7 @@ additional steps:
    server.
 
     ```sh
-    sudo npm install -g localtunnel
+    $ sudo npm install -g localtunnel
     ```
 
 2. With the application already running, open another terminal and run
