@@ -1,7 +1,8 @@
 """Registers modules and initializes the application."""
 import http.client
+from pathlib import Path
 
-from flask import Flask
+from flask import Flask, send_from_directory
 from flask.ext.login import LoginManager
 from flask.ext.sqlalchemy import SQLAlchemy
 
@@ -24,6 +25,13 @@ app.register_blueprint(users_module)
 
 from gamefolk import assets
 assets.init_app(app)
+
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(
+        Path(app.root_path) / 'static',
+        'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
 @app.errorhandler(http.client.INTERNAL_SERVER_ERROR)
