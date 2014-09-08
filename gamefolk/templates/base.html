@@ -54,13 +54,20 @@
 {% block content %}
 {% endblock content %}
 {% block footer %}
-<footer class="row">
-  <div class="small-4 large-4 columns">
-    <small>Copyright &copy; 2013-Present Gamefolk LLC</small>
-    <address class="email">contact@gamefolk.org</address>
-    <a href="http://github.com/gamefolk">github.com/gamefolk</a>
-  </div>
-</footer>
+<div class="row">
+  <footer class="gamefolk-footer small-10 small-centered columns">
+    <div class="small-3 push-9 columns">
+      <ul class="contact-links">
+        <li><a href="mailto:contact@gamefolk.org">Email</a></li>
+        <li><a href="http://github.com/gamefolk">GitHub</a></li>
+      </ul>
+    </div>
+    <div class="small-8 pull-4 columns">
+      <p class="footer-logo">Gamefolk</p>
+      <small>&copy; 2013-Present Gamefolk LLC</small>
+    </div>
+  </footer>
+</div>
 {% endblock %}
 <script>
   $(document).foundation();
