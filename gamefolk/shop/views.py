@@ -26,10 +26,17 @@ else:
 
 
 @mod.route('/')
-@login_required
 def shop():
-    """The main view for the shop."""
+    """The main view of the shop. Contains information about the cartridge."""
     return render_template('shop/shop.html')
+
+
+@mod.route('/purchase')
+@login_required
+def purchase():
+    """The view that redirects the user to PayPal if they wish to buy a
+    cartridge."""
+    return render_template('shop/purchase.html')
 
 
 @mod.route('/complete-payment')
