@@ -56,8 +56,8 @@ and complain about implicit declarations of GBDK library functions. Add the
 following lines after the initial includes in that file to silence those errors.
 
 ```c
-#ifndef __LCC__
-#define NONBANKED ;
+#if !defined(__LCC__) && !defined(SDCC_REVISION)
+#define NONBANKED
 #endif
 ```
 
