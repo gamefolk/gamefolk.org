@@ -59,5 +59,7 @@ node_modules/
 bower_components/
 *.log
 
+# AWS
 build/
 dist/
+.elasticbeanstalk/

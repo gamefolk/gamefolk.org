@@ -62,7 +62,7 @@ respectively.
 7. Run the application.
 
     ```sh
-    $ python run.py
+    $ python application.py
     ```
 
 8. Navigate to `localhost:5000` in your browser.
