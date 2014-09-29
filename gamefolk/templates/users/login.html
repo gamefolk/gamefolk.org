@@ -4,17 +4,20 @@
 
 {% block content %}
 <div class="row">
-  <header class="large-9 small-9 column">
+  <header class="large-9 small-12 column">
     <h1>Sign in</h1>
   </header>
 </div>
 <div class="row">
-  <section class="large-9 small-9 column">
+  <section class="large-5 small-12 column">
     <form action="" method="post" id="login">
       {{ form.csrf_token }}
       {{ render_field(form.email) }}
       {{ render_field(form.password) }}
-      <button type="submit">Sign In</button>
+      <div class="row">
+        <div class="large-12 columns">
+          <button type="submit">Sign In</button>
+        </div>
     </form>
   </section>
 </div>

@@ -1,6 +1,6 @@
 {% macro render_field(field) %}
 <div class="row">
-  <div class="large-6 columns{% if field.errors %} error{% endif %}">
+  <div class="small-12 columns{% if field.errors %} error{% endif %}">
     {{ field.label }}
     {{ field(**kwargs)|safe }}
     {% for error in field.errors %}

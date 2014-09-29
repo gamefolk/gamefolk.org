@@ -4,19 +4,23 @@
 
 {% block content %}
 <div class="row">
-  <header class="large-9 small-9 column">
+  <header class="large-9 small-12 column">
     <h1>Register for the Gamefolk Shop</h1>
   </header>
 </div>
 <div class="row">
-  <section class="large-9 small-9 column">
+  <section class="large-5 small-12 column">
     <form method="POST" action="">
       {{ form.csrf_token }}
       {{ render_field(form.email) }}
       {{ render_field(form.password) }}
       {{ render_field(form.confirm) }}
       {{ render_field(form.recaptcha) }}
-      <button type="submit">Submit</button>
+      <div class="row">
+        <div class="small-12 columns">
+          <button type="submit">Submit</button>
+        </div>
+      </div>
     </form>
   </section>
 </div>
