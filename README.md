@@ -1,12 +1,9 @@
 # Gamefolk.org
 
+A [Flask][flask] web application built with Python 3.
+
 ## Installation Procedure
-This application requires Python 3.3+ and node.js. The application is served
-using [Flask][flask] and node.js handles the frontend dependencies.
-If you're using Linux, these programs can be installed using your distro's
-package manager. If you're using OS X or Windows, I suggest using an unofficial
-package manager such as [homebrew][homebrew] or [chocolatey][chocolatey],
-respectively.
+### Setup
 
 1.  Clone the repository and cd into it.
 
@@ -14,29 +11,7 @@ respectively.
     $ git clone https://github.com/gamefolk/gamefolk.org && cd gamefolk.org
     ```
 
-2. Install command-line tools.
-
-    ```sh
-    $ sudo pip install virtualenv
-    $ sudo npm install -g grunt-cli
-    ```
-
-3.  Create and activate a virtualenv.
-
-    ```sh
-    $ virtualenv -p /path/to/your/python3 .
-    $ source bin/activate
-    ```
-
-4. Install local dependencies.
-
-    ```sh
-    $ pip install -r requirements.txt
-    $ npm install
-    $ grunt
-    ```
-
-5. Create a Python file somewhere outside of the repository. This file will
+2. Create a Python file somewhere outside of the repository. This file will
    contain secret information relevant to the application that should not be
    pushed the respository. The file should contain the following key-value
    pairs:
@@ -52,23 +27,70 @@ respectively.
     CARTRIDGE_COST = '...'
     ```
 
-6. Export an environment variable so that Flask can find the secret
+### Docker Installation (Option A)
+
+1. Move your Python config file into your current directory.
+
+2. If you don't have the docker daemon already running, start it now.
+
+3.  Build the image and run the application.
+
+    ```sh
+    $ sudo docker build --rm --tag=gamefolk.org .
+    $ sudo docker run -e "GAMEFOLK_SETTINGS=/src/your_config_file_name.py" -p 5000:5000 -d gamefolk.org
+    ```
+
+3. Navigate to `localhost:5000` in your browser.
+
+### Manual Installation (Option B)
+
+This application requires Python 3.3+ and node.js. The application is served
+using Flask and node.js handles the frontend dependencies. If you're using
+Linux, these programs can be installed using your distro's package manager. If
+you're using OS X or Windows, I suggest using an unofficial package manager such
+as [homebrew][homebrew] or [chocolatey][chocolatey], respectively.
+
+1. Install command-line tools.
+
+    ```sh
+    $ sudo pip install virtualenv
+    $ sudo npm install -g grunt-cli
+    ```
+
+2.  Create and activate a virtualenv.
+
+    ```sh
+    $ virtualenv -p /path/to/your/python3 .
+    $ source bin/activate
+    ```
+
+3. Install local dependencies.
+
+    ```sh
+    $ pip install -r requirements.txt
+    $ npm install
+    $ grunt
+    ```
+
+4. Export an environment variable so that Flask can find the secret
    configuration.
 
     ```sh
     $ export GAMEFOLK_SETTINGS=/path/to/the/file/you/just/made.py
     ```
 
-7. Run the application.
+5. Run the application.
 
     ```sh
     $ python application.py
     ```
 
-8. Navigate to `localhost:5000` in your browser.
+6. Navigate to `localhost:5000` in your browser.
 
-You're done! If you want to test the site's PayPal integration, there are some
-additional steps:
+### PayPal Integration
+
+If you want to test the site's PayPal integration, there are some additional
+steps:
 
 1. Install localtunnel. This program allows you to pipe requests from the
    internet to your local machine without setting up your machine as a web
