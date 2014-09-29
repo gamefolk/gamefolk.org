@@ -1,1 +1,10 @@
 .git
+
+bin/
+lib/
+include/
+
+node_modules/
+build/
+dist/
+bower_components/
