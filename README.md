@@ -25,6 +25,11 @@ A [Flask][flask] web application built with Python 3.
     PAYPAL_MERCHANT_ID = '...'
     PAYPAL_MERCHANT_EMAIL = '...'
     CARTRIDGE_COST = '...'
+    MAIL_SERVER = '...'
+    MAIL_PORT = '...'
+    MAIL_USERNAME = '...'
+    MAIL_PASSWORD = '...'
+    DEFAULT_MAIL_SENDER = '...'
     ```
 
 ### Docker Installation (Option A)
@@ -111,6 +116,16 @@ steps:
 3. Open the URL that localtunnel outputs in your browser. Note: due to the way
    that recaptcha verifies registration, you will have to register accounts on
    localhost rather than through the localtunnel.
+
+### Email
+
+To test email integration, you will need to set up a fake STMP server.
+Thankfully, Python comes with one built in. Just open up another terminal and
+execute
+
+```sh
+sudo python -m smptd -n -c DebuggingServer localhost:25
+ ```
 
 ## Development
 

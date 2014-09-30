@@ -1,11 +1,12 @@
 """User-related views."""
 
-from flask import (Blueprint, request, render_template, flash, redirect, \
-    url_for)
-from flask.ext.login import (login_required, current_user, login_user, \
-    logout_user)
+from flask import (Blueprint, request, render_template, flash, redirect,
+                   url_for)
+from flask.ext.login import (login_required, current_user, login_user,
+                             logout_user)
+from flask.ext.mail import Message
 
-from gamefolk import db, login_manager
+from gamefolk import db, login_manager, mail
 from gamefolk.users.forms import LoginForm, RegisterForm
 from gamefolk.users.models import User
 
@@ -37,6 +38,15 @@ def register():
         db.session.commit()
 
         login_user(user)
+
+        # Send email confirmation to the user
+        message = Message("Gamefolk.org Registration Confirmation",
+                          recipients=[user.email])
+        message.body = (
+            "Thank you for registering an account at gamefolk.org. "
+            "Your profile can be found at {}").format(
+                url_for('users.profile', _external=True))
+        mail.send(message)
 
         flash("Thanks for registering!", 'info')
         return redirect(url_for('users.profile'))

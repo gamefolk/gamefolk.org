@@ -4,6 +4,7 @@ from pathlib import Path
 
 from flask import Flask, send_from_directory
 from flask.ext.login import LoginManager
+from flask.ext.mail import Mail
 from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -12,6 +13,8 @@ app.config.from_envvar('GAMEFOLK_SETTINGS')
 
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
+
+mail = Mail(app)
 
 # Register blueprints. This must be done after the database is created.
 from gamefolk.general.views import mod as general_module
