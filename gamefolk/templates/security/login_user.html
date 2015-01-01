@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% from "helpers.html" import render_field %}
+
+{% block title %}Log In{% endblock %}
+
+{% block content %}
+<div class="row">
+  <header class="large-9 small-12 column">
+    <h1>Sign in</h1>
+  </header>
+</div>
+<div class="row">
+  <section class="large-5 small-12 column">
+    <form action="" method="post" id="login">
+      {% set form = login_user_form %}
+      {{ form.csrf_token }}
+      {{ render_field(form.email) }}
+      {{ render_field(form.password) }}
+      {{ render_field(form.submit) }}
+    </form>
+  </section>
+</div>
+<div class="row">
+  <section class="large-9 small-9 column">
+    <p><a href="{{ url_for_security('forgot_password') }}">Forgot Password?</a></p>
+    <p>Not Registered? <a href="{{ url_for_security('register') }}">Sign up here.</a></p>
+  </section>
+</div>
+{% endblock %}

@@ -1,7 +1,7 @@
-FROM ubuntu:14.04
+FROM ubuntu:latest
 
 RUN apt-get update
-RUN apt-get install -y python3-setuptools python3-mysql.connector nodejs nodejs-legacy npm git
+RUN apt-get install -y python3-setuptools libpython3-dev python3-mysql.connector nodejs nodejs-legacy npm git
 
 RUN easy_install3 pip
 RUN npm install -g grunt-cli

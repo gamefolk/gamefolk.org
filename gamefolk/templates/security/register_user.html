@@ -13,16 +13,13 @@
 <div class="row">
   <section class="large-5 small-12 column">
     <form method="POST" action="">
+      {% set form = register_user_form %}
       {{ form.csrf_token }}
       {{ render_field(form.email) }}
       {{ render_field(form.password) }}
-      {{ render_field(form.confirm) }}
+      {{ render_field(form.password_confirm) }}
       {{ render_field(form.recaptcha) }}
-      <div class="row">
-        <div class="small-12 columns">
-          <button type="submit">Submit</button>
-        </div>
-      </div>
+      {{ render_field(form.submit) }}
     </form>
   </section>
 </div>

@@ -1,10 +1,10 @@
 """Registers modules and initializes the application."""
 import http.client
-from pathlib import Path
+import os
 
 from flask import Flask, send_from_directory
-from flask.ext.login import LoginManager
 from flask.ext.mail import Mail
+from flask.ext.security import Security, SQLAlchemyUserDatastore
 from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -12,7 +12,11 @@ app.config.from_object('config')
 app.config.from_envvar('GAMEFOLK_SETTINGS')
 
 db = SQLAlchemy(app)
-login_manager = LoginManager(app)
+
+from gamefolk.users.models import User, Role
+from gamefolk.users.forms import ExtendedRegisterForm
+user_datastore = SQLAlchemyUserDatastore(db, User, Role)
+security = Security(app, user_datastore, register_form=ExtendedRegisterForm)
 
 mail = Mail(app)
 
@@ -33,7 +37,7 @@ assets.init_app(app)
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(
-        Path(app.root_path) / 'static',
+        os.path.join(app.root_path, 'static'),
         'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
