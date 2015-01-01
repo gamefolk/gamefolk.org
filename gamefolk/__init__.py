@@ -16,7 +16,8 @@ db = SQLAlchemy(app)
 from gamefolk.users.models import User, Role
 from gamefolk.users.forms import ExtendedRegisterForm
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-security = Security(app, user_datastore, register_form=ExtendedRegisterForm)
+security = Security(app, user_datastore,
+                    confirm_register_form=ExtendedRegisterForm)
 
 mail = Mail(app)
 
