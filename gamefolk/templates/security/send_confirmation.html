@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% from "helpers.html" import render_field %}
+
+{% block title %}Resend Confirmation{% endblock %}
+
+{% block content %}
+<div class="row">
+  <header class="large-9 small-12 column">
+    <h1>Resend Confirmation Instructions</h1>
+  </header>
+</div>
+<div class="row">
+  <section class="large-5 small-12 column">
+    <form action="" method="post">
+      {% set form = send_confirmation_form %}
+      {{ form.csrf_token }}
+      {{ render_field(form.email) }}
+      {{ render_field(form.submit) }}
+    </form>
+  </section>
+</div>
+{% endblock %}
