@@ -19,5 +19,10 @@
   "dependencies": {
     "foundation": "~5.3.1",
     "highlightjs": "~8.0.0"
+  },
+  "exportsOverride": {
+      "foundation": {
+          "": "/"
+      }
   }
 }

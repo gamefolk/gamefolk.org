@@ -3,15 +3,7 @@
   "version": "0.0.1",
   "description": "Gamefolk Website",
   "dependencies": {
-    "grunt": "^0.4.5",
-    "grunt-autoprefixer": "^1.0.1",
-    "grunt-contrib-watch": "^0.6.1"
-  },
-  "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-autoprefixer": "^1.0.1",
-    "grunt-bower-task": "^0.4.0",
-    "grunt-contrib-watch": "^0.6.1"
+    "autoprefixer": "^5.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -1,18 +1,17 @@
 """Initializes frontend assets."""
-import os
+from pathlib import Path
 
 from flask.ext.assets import Bundle, Environment
 
 js = Bundle(
-    'jquery/jquery.js',
-    'modernizr/modernizr.js',
-    'foundation/foundation.js',
+    'libs/jquery/jquery.js',
+    'libs/modernizr/modernizr.js',
+    'libs/foundation/js/foundation.js',
 )
 
-css = Bundle(
-    'css/styles.css',
-    'foundation/foundation.css'
-)
+scss = Bundle('scss/app.scss', filters=['pyscss', 'autoprefixer'])
+
+css = Bundle(scss, filters='autoprefixer', output='public/styles.css')
 
 js_syntax = Bundle(
     'highlightjs/highlight.pack.js'
@@ -26,7 +25,14 @@ css_syntax = Bundle(
 def init_app(app):
     """Set up webassets for the specified application."""
     assets = Environment(app)
-    assets.append_path(os.path.join(app.static_folder, 'build'))
+
+    assets.config['PYSCSS_LOAD_PATHS'] = [
+        str(Path(app.static_folder) / 'libs')
+    ]
+
+    assets.config['AUTOPREFIXER_BIN'] = (
+        str(app.config['APP_ROOT'] / 'node_modules' / 'autoprefixer' / 'autoprefixer')
+    )
 
     assets.register('js_all', js)
     assets.register('css_all', css)

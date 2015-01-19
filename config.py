@@ -1,3 +1,5 @@
+from pathlib import Path
+
 CSRF_ENABLED = True
 
 # Security Settings
@@ -14,3 +16,5 @@ SECURITY_MSG_USER_DOES_NOT_EXIST = ('Username and password do not match', 'error
 
 SECURITY_EMAIL_SENDER = 'donotreply@gamefolk.org'
 SECURITY_EMAIL_SUBJECT_REGISTER = 'Gamefolk.org Registration Confirmation'
+
+APP_ROOT = Path(__file__).parent

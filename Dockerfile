@@ -1,17 +1,25 @@
 FROM ubuntu:latest
 
 RUN apt-get update
-RUN apt-get install -y python3-setuptools libpython3-dev python3-mysql.connector nodejs nodejs-legacy npm git
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    python3-setuptools \
+    libpython3-dev \
+    python3-mysql.connector \
+    libpcre3-dev \
+    nodejs \
+    nodejs-legacy \
+    npm \
+    git
 
 RUN easy_install3 pip
-RUN npm install -g grunt-cli
+RUN npm install -g bower
 
 ADD . /src
 
 WORKDIR /src
 RUN pip install -r requirements.txt
 RUN npm install
-RUN grunt
+RUN bower install --allow-root
 
 EXPOSE 5000
 
