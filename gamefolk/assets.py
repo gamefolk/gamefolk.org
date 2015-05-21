@@ -4,7 +4,7 @@ from pathlib import Path
 from flask.ext.assets import Bundle, Environment
 
 js = Bundle(
-    'libs/jquery/jquery.js',
+    'libs/jquery/dist/jquery.js',
     'libs/modernizr/modernizr.js',
     'libs/foundation/js/foundation.js',
 )
