@@ -25,6 +25,7 @@ python-dateutil==2.3
 requests==2.3.0
 six==1.8.0
 SQLAlchemy==0.9.8
+stripe==1.22.3
 webassets==0.10.1
 Werkzeug==0.9.6
 WTForms==2.0.2

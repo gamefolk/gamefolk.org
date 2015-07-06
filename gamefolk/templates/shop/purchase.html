@@ -9,20 +9,44 @@
   </header>
 </div>
 <div class="row">
-  <div class="large-4 small-4 small-centered column">
-    <img src="http://placehold.it/400x400" />
-    <script async="async" src="https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant={{ config['PAYPAL_MERCHANT_ID'] }}"
-        data-button="buynow"
-        data-name="Room Full of Cats Cartridge"
-        data-quantity="1"
-        data-amount="{{ config['CARTRIDGE_COST'] }}"
-        data-currency="USD"
-        data-callback="{{ url_for('shop.instant_payment_notification', _external=True) }}"
-        data-custom="{{ current_user.get_id() }}"
-        {% if config['DEBUG'] %}
-        data-env="sandbox"
-        {% endif %}
-    ></script>
+  <div class="large-8 small-8 small-centered column">
+    {% set description = "Room Full of Cats Cartridge" %}
+    <div class="row">
+      <div class="small-12 small-centered column cartridge-preview">
+        <img height="400" width="400" src="http://placehold.it/400x400" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-6 column">
+        <a href="https://paypal.com"><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" alt="PayPal" /></a>
+        <script async="async" src="https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant={{ config['PAYPAL_MERCHANT_ID'] }}"
+            data-button="buynow"
+            data-name={{ description }}
+            data-quantity="1"
+            data-amount="{{ cartridge_cost / 100 }}"
+            data-currency="USD"
+            data-callback="{{ url_for('shop.instant_payment_notification', _external=True) }}"
+            data-custom="{{ current_user.get_id() }}"
+            {% if config['DEBUG'] %}
+            data-env="sandbox"
+            {% endif %}
+        ></script>
+      </div>
+      <div class="small-6 column">
+        <a href="https://stripe.com"><img src="{{ url_for('static', filename='img/powered_by_stripe.png') }}" /></a>
+        <form action="{{ url_for('shop.stripe_charge') }}" method="post">
+          <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-email="{{ current_user.email }}"
+              data-key="{{ stripe_key }}"
+              data-description="{{ description }}"
+              data-amount="{{ cartridge_cost }}"
+              data-bitcoin="true"
+              data-shippingAddress="true"
+              data-label="Pay with Card or BTC"
+          ></script>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}
