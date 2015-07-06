@@ -11,6 +11,24 @@ app = Flask(__name__)
 app.config.from_object('config')
 app.config.from_envvar('GAMEFOLK_SETTINGS')
 
+# Send emails to admins on Internal Server Errors
+if not app.debug:
+    import logging
+    from logging.handlers import SMTPHandler
+    mail_host = app.config['MAIL_SERVER'], app.config['MAIL_PORT']
+    admins = app.config['ADMINS']
+    credentials = app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD']
+
+    mail_handler = SMTPHandler(
+            mail_host,
+            'server-error@gamefolk.org',
+            admins,
+            'Internal Server Error',
+            credentials=credentials,
+            secure=())
+    mail_handler.setLevel(logging.ERROR)
+    app.logger.addHandler(mail_handler)
+
 db = SQLAlchemy(app)
 
 from gamefolk.users.models import User, Role
