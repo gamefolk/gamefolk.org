@@ -41,8 +41,8 @@ A [Flask][flask] web application built with Python 3.
 3.  Build the image and run the application.
 
     ```sh
-    $ sudo docker build --rm --tag=gamefolk.org .
-    $ sudo docker run -e "GAMEFOLK_SETTINGS=/src/your_config_file_name.py" -p 5000:5000 -d gamefolk.org
+    $ docker-compose build
+    $ docker-compose up
     ```
 
 3. Navigate to `localhost:5000` in your browser.

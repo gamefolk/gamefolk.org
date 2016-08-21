@@ -1,0 +1,10 @@
+web:
+  restart: always
+  build: .
+  environment:
+    GAMEFOLK_SETTINGS: /src/.env
+  expose:
+    - 5000
+  ports:
+    - "5000:5000"
+  command: python3 application.py
