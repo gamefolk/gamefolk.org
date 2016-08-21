@@ -14,12 +14,16 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
 RUN easy_install3 pip
 RUN npm install -g bower
 
-ADD . /src
+ADD requirements.txt  /src/requirements.txt
+ADD package.json /src/package.json
+ADD bower.json /src/bower.json
 
 WORKDIR /src
 RUN pip install -r requirements.txt
 RUN npm install
 RUN bower install --allow-root
+
+ADD . /src
 
 EXPOSE 5000
 
