@@ -14,11 +14,11 @@ scss = Bundle('scss/app.scss', filters=['pyscss', 'autoprefixer'])
 css = Bundle(scss, filters='autoprefixer', output='public/styles.css')
 
 js_syntax = Bundle(
-    'highlightjs/highlight.pack.js'
+    'libs/highlightjs/highlight.pack.js'
 )
 
 css_syntax = Bundle(
-    'highlightjs/default.css'
+    'libs/highlightjs/styles/default.css'
 )
 
 
