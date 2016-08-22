@@ -17,6 +17,7 @@ RUN npm install -g bower
 ADD requirements.txt  /src/requirements.txt
 ADD package.json /src/package.json
 ADD bower.json /src/bower.json
+ADD .bowerrc /src/.bowerrc
 
 WORKDIR /src
 RUN pip install -r requirements.txt
